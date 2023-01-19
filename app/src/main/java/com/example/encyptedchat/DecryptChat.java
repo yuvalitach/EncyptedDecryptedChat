@@ -1,8 +1,10 @@
 package com.example.encyptedchat;
 
+import android.os.Build;
 import android.util.Log;
 
 import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -11,23 +13,18 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 public class DecryptChat {
+    private static final String KEY = "1Hbfh667adfDEJ78"; // 128 bit key
     private static final String ALGORITHM = "AES";
     private static final byte[] keyValue =
             new byte[] { 'T', 'h', 'e', 'B', 'e', 's', 't',
                     'S', 'e', 'c', 'r','e', 't', 'K', 'e', 'y' };
 
-    public static List<String> decrypt(List<String> encryptedValues) {Log.d("decryptedValuesTAG", "encryptedValues: "+encryptedValues);
+    public static List<String> decrypt(List<String> encryptedValues) {
         List<String> decryptedValues = new ArrayList<>();
         try {
-            SecretKeySpec key = new SecretKeySpec(keyValue, ALGORITHM);
-            Cipher c = Cipher.getInstance(ALGORITHM);
-            c.init(Cipher.DECRYPT_MODE, key);
-
             for (String value : encryptedValues) {
-                byte[] decodedValue = Base64.getDecoder().decode(value);
-                Log.d("decryptedValuesTAG", "decodedValue: "+decodedValue);
-                byte[] decValue = c.doFinal(decodedValue);
-                decryptedValues.add(new String(decValue, StandardCharsets.UTF_8));
+                String decValue = decrypt(value);
+                decryptedValues.add(decValue);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -35,20 +32,24 @@ public class DecryptChat {
         return decryptedValues;
     }
 
-    public static String encrypt(String value) {
-        String encryptedValue = null;
-        try {
-            SecretKeySpec key = new SecretKeySpec(keyValue, ALGORITHM);
-            Cipher c = Cipher.getInstance(ALGORITHM);
-            c.init(Cipher.ENCRYPT_MODE, key);
-
-            byte[] encValue = c.doFinal(value.getBytes());
-            byte[] encodedValue = Base64.getEncoder().encode(encValue);
-            encryptedValue = new String(encodedValue);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static String decrypt(String value) throws Exception {
+        Key key = new SecretKeySpec(KEY.getBytes("UTF-8"), ALGORITHM);
+        Cipher cipher = Cipher.getInstance(ALGORITHM);
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        byte[] decryptedValue64 = new byte[0];
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            decryptedValue64 = Base64.getDecoder().decode(value);
         }
-        return encryptedValue;
+        byte[] decryptedByteValue = cipher.doFinal(decryptedValue64);
+        return new String(decryptedByteValue, "UTF-8");
+    }
+
+    public static String encrypt(String value) throws Exception {
+        Key key = new SecretKeySpec(KEY.getBytes("UTF-8"), ALGORITHM);
+        Cipher cipher = Cipher.getInstance(ALGORITHM);
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        byte[] encryptedBytes = cipher.doFinal(value.getBytes("UTF-8"));
+            return Base64.getEncoder().encodeToString(encryptedBytes);
     }
 
 }

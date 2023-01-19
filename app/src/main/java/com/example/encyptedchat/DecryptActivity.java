@@ -20,12 +20,23 @@ public class DecryptActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_decrypt);
 
         listView = (ListView) findViewById(R.id.list_view);
 
         encryptedValues = new ArrayList<>();
-        encryptedValues.add(DecryptChat.encrypt("yuval"));
+        try {
+            encryptedValues.add(DecryptChat.encrypt("yuval"));
+            encryptedValues.add(DecryptChat.encrypt("shaked"));
+            encryptedValues.add(DecryptChat.encrypt("Yehonatan"));
+            encryptedValues.add(DecryptChat.encrypt("Adir"));
+            encryptedValues.add(DecryptChat.encrypt("Gaby"));
+            encryptedValues.add(DecryptChat.encrypt("Orna"));
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // Add your encrypted values to the list
         decryptedValues = DecryptChat.decrypt(encryptedValues);
         Log.d("decryptedValuesTAG", "onCreate: "+decryptedValues);
