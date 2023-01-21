@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "299637353376",
+    "project_id": "encrypteddecryptedchat",
+    "storage_bucket": "encrypteddecryptedchat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299637353376:android:84acb9f95e1c295c1a52c5",
+        "android_client_info": {
+          "package_name": "com.example.encryptedchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299637353376-cidrc2v5e4627c35aimvlq5li5e7p0na.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUHrTWgmY_NOn6c90LOOkUhFMPjnIxzm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299637353376-cidrc2v5e4627c35aimvlq5li5e7p0na.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299637353376:android:dab5cdd1c0ca9a761a52c5",
+        "android_client_info": {
+          "package_name": "com.example.encyptedchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299637353376-cidrc2v5e4627c35aimvlq5li5e7p0na.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUHrTWgmY_NOn6c90LOOkUhFMPjnIxzm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299637353376-cidrc2v5e4627c35aimvlq5li5e7p0na.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

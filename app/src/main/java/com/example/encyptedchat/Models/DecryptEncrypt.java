@@ -1,9 +1,5 @@
-package com.example.encyptedchat;
+package com.example.encyptedchat.Models;
 
-import android.os.Build;
-import android.util.Log;
-
-import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -12,7 +8,7 @@ import java.util.List;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-public class DecryptChat {
+public class DecryptEncrypt {
     private static final String KEY = "1Hbfh667adfDEJ78"; // 128 bit key
     private static final String ALGORITHM = "AES";
     private static final byte[] keyValue =
