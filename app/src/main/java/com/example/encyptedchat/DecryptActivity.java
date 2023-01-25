@@ -61,7 +61,7 @@ public class DecryptActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        userToStore=new User("Yuval","abcdefg", encryptedValues);
+        userToStore=new User("Yuval","abcdefg", encryptedValues,0);
         dataManager.setCurrentUser(userToStore);
         dataManager.storeUserInDB(userToStore);
 

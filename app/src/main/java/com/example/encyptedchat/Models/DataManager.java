@@ -15,6 +15,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.util.ArrayList;
+
 public class DataManager {
     private final FirebaseAuth firebaseAuth;
     private final FirebaseFirestore dbFireStore;
@@ -22,6 +24,7 @@ public class DataManager {
 
 
     private User currentUser;
+    private ArrayList<String> encryptedValues;
     private static DataManager single_instance = null;
 
     private DataManager(){
@@ -104,4 +107,25 @@ public class DataManager {
         });
         return answer[0];
     }
+    public void loadMessagesFromDB() {
+        CollectionReference myRef = dbFireStore.collection("Messages");
+        myRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        encryptedValues.add(document.toString());
+                    }
+                } else {
+                    Log.d("pttt", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
+
+    public void storeMessagesInDB(String message) {
+        Message temp = new Message(message);
+        dbFireStore.collection("Messages").document(temp.getMessageId()).set(temp);
+    }
+
     }

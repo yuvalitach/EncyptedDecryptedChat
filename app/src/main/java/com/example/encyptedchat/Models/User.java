@@ -7,10 +7,14 @@ public class User {
     String key;
     ArrayList <String> messageArray;
 
-    public User(String name, String key, ArrayList<String> messageArray) {
+    //0 - sender , 1- receiver
+    Integer role;
+
+    public User(String name, String key, ArrayList<String> messageArray, Integer role) {
         this.name = name;
         this.key = key;
         this.messageArray = messageArray;
+        this.role = role;
     }
 
 
@@ -21,6 +25,14 @@ public class User {
     public User setName(String name) {
         this.name = name;
         return this;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
     }
 
     public String getKey() {
