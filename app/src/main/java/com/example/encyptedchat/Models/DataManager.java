@@ -33,6 +33,10 @@ public class DataManager {
         storage = FirebaseStorage.getInstance();
     }
 
+    public ArrayList<String> getEncryptedValues() {
+        return encryptedValues;
+    }
+
     public static DataManager getInstance() {
         return single_instance;
     }
@@ -126,6 +130,7 @@ public class DataManager {
     public void storeMessagesInDB(String message) {
         Message temp = new Message(message);
         dbFireStore.collection("Messages").document(temp.getMessageId()).set(temp);
+        encryptedValues.add(message);
     }
 
     }
