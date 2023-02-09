@@ -14,7 +14,7 @@ import android.widget.PopupWindow;
 
 import com.example.encyptedchat.Models.DataManager;
 import com.example.encyptedchat.Models.DecryptEncrypt;
-import com.example.encyptedchat.Models.User;
+import com.example.encyptedchat.Models.Message;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -25,11 +25,10 @@ public class DecryptActivity extends AppCompatActivity {
 
     private ListView listView;
     private ArrayAdapter<String> adapter;
-    private ArrayList<String> encryptedValues;
+    private ArrayList<Message> encryptedValues;
     private List<String> decryptedValues;
     private PopupWindow popupWindow;
     private final DataManager dataManager = DataManager.getInstance();
-    User userToStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,11 @@ public class DecryptActivity extends AppCompatActivity {
         setContentView(R.layout.activity_decrypt);
 
         listView = (ListView) findViewById(R.id.list_view);
-        listView.setVisibility(View.GONE);
+        //listView.setVisibility(View.GONE);
+        Bundle bundle = getIntent().getExtras();
+        String name = bundle.getString("name");
+        encryptedValues = dataManager.getMessages();
+
         findViewById(R.id.activity_decrypt1).post(new Runnable() {
             public void run() {
                 onButtonShowPopupWindowClick(findViewById(R.id.activity_decrypt1));
@@ -49,27 +52,22 @@ public class DecryptActivity extends AppCompatActivity {
         encryptedValues = new ArrayList<>();
 
         try {
-            encryptedValues.add(DecryptEncrypt.encrypt("yuval"));
-            encryptedValues.add(DecryptEncrypt.encrypt("shaked"));
-            encryptedValues.add(DecryptEncrypt.encrypt("Yehonatan"));
-            encryptedValues.add(DecryptEncrypt.encrypt("Adir"));
-            encryptedValues.add(DecryptEncrypt.encrypt("Gaby"));
-            encryptedValues.add(DecryptEncrypt.encrypt("Orna"));
+//            encryptedValues.add(DecryptEncrypt.encrypt("yuval"));
+//            encryptedValues.add(DecryptEncrypt.encrypt("shaked"));
+//            encryptedValues.add(DecryptEncrypt.encrypt("Yehonatan"));
+//            encryptedValues.add(DecryptEncrypt.encrypt("Adir"));
+//            encryptedValues.add(DecryptEncrypt.encrypt("Gaby"));
+//            encryptedValues.add(DecryptEncrypt.encrypt("Orna"));
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        userToStore=new User("Yuval","abcdefg", encryptedValues,0);
-        dataManager.setCurrentUser(userToStore);
-        dataManager.storeUserInDB(userToStore);
+//        userToStore=new User("Yuval","abcdefg", encryptedValues,0);
+//        dataManager.setCurrentUser(userToStore);
+//        dataManager.storeUserInDB(userToStore);
 
-        // Add your encrypted values to the list
-        decryptedValues = DecryptEncrypt.decrypt(encryptedValues);
-        Log.d("decryptedValuesTAG", "onCreate: "+decryptedValues);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, decryptedValues);
-        listView.setAdapter(adapter);
 
 
     }
@@ -98,7 +96,14 @@ public class DecryptActivity extends AppCompatActivity {
 //                saveManuelAccount();
             }
         });
+    }
 
+    public void updateAdapter (){
+        // Add your encrypted values to the list
+        //encryptedValues = DecryptEncrypt.decrypt(encryptedValues);
+        //Log.d("decryptedValuesTAG", "onCreate: "+decryptedValues);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, decryptedValues);
+        listView.setAdapter(adapter);
 
     }
 }

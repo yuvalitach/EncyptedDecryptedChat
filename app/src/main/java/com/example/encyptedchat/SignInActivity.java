@@ -21,26 +21,32 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in_activity);
-
+        findsViews();
         main_BTN_sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int exist;
                 String name = main_EDT_name.getText().toString();
-                exist = dataManager.findUserInDB(name);
-                if (exist == 0) {
-                    if (dataManager.getCurrentUser().getRole() == 0){
-                        intent = new Intent(SignInActivity.this, EncryptActivity.class);
-                    } else {
-                        dataManager.loadMessagesFromDB();
-                        intent = new Intent(SignInActivity.this, DecryptActivity.class);
-                    }
-                    startActivity(intent);
-                    finish();
-                }
-                if (exist == 1) {
-                    Toast.makeText(SignInActivity.this, "The user is not registered in the system", Toast.LENGTH_SHORT).show();
-                }
+                Bundle bundle = new Bundle();
+                bundle.putString("name",name);
+                dataManager.loadMessagesFromDB();
+                intent = new Intent(SignInActivity.this, DecryptActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
+
+                //                if (exist == 0) {
+//                    if (dataManager.getCurrentUser().getRole() == 0){
+//                        intent = new Intent(SignInActivity.this, EncryptActivity.class);
+//                    } else {
+//                        dataManager.loadMessagesFromDB();
+//                        intent = new Intent(SignInActivity.this, DecryptActivity.class);
+//                    }
+//                    startActivity(intent);
+//                    finish();
+//                }
+//                if (exist == 1) {
+//                    Toast.makeText(SignInActivity.this, "The user is not registered in the system", Toast.LENGTH_SHORT).show();
+//                }
 
             }
         });

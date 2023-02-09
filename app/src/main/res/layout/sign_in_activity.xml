@@ -46,7 +46,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.button.MaterialButton
+
+        <com.google.android.material.button.MaterialButton
         android:id="@+id/main_BTN_sign_in"
         android:layout_width="200dp"
         android:layout_height="60dp"

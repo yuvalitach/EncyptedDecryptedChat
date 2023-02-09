@@ -8,7 +8,6 @@ plugins {
 android {
     namespace 'com.example.encyptedchat'
     compileSdkVersion 33
-    buildToolsVersion "30.0.1"
 
 
     defaultConfig {
