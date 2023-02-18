@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:background="#87ABC8"
     tools:context=".DecryptActivity">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/account_EDT_bank"
+        android:id="@+id/popUp_EDT_key"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,14 +16,14 @@
         android:hint="ENTER KEY"
         android:padding="16dp"
         android:textColorHint="@color/white"
-        app:boxBackgroundColor="#ABE6ED"
+        app:boxBackgroundColor="#87ABC8"
         app:boxCornerRadiusBottomEnd="30dp"
         app:boxCornerRadiusBottomStart="30dp"
         app:boxCornerRadiusTopEnd="30dp"
         app:boxCornerRadiusTopStart="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/popup_LBL_accountName"
+            android:id="@+id/popup_LBL_key"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="30"
@@ -31,21 +31,53 @@
             android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/popup_decryptMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text=""
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="600dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="100dp">
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/popup_BTN_save"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/account_EDT_bank"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         android:layout_weight="1"
         android:text="GO!"
-        android:textColor="#ABE6ED"
+        android:textSize="15sp"
+        android:textColor="@color/white"
         app:cornerRadius="50dp"
-        app:strokeColor="#ABE6ED" />
+        app:strokeColor="@color/white"  />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/popup_BTN_exit"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:text="exit"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        app:cornerRadius="50dp"
+        app:strokeColor="@color/white" />
 
+    </LinearLayout>
 </RelativeLayout>

@@ -15,21 +15,10 @@ public class DecryptEncrypt {
             new byte[] { 'T', 'h', 'e', 'B', 'e', 's', 't',
                     'S', 'e', 'c', 'r','e', 't', 'K', 'e', 'y' };
 
-    public static List<String> decrypt(List<String> encryptedValues) {
-        List<String> decryptedValues = new ArrayList<>();
-        try {
-            for (String value : encryptedValues) {
-                String decValue = decrypt(value);
-                decryptedValues.add(decValue);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return decryptedValues;
-    }
 
-    public static String decrypt(String value) throws Exception {
-        Key key = new SecretKeySpec(KEY.getBytes("UTF-8"), ALGORITHM);
+
+    public static String decrypt(String value, String keyMessage) throws Exception {
+        Key key = new SecretKeySpec(keyMessage.getBytes("UTF-8"), ALGORITHM);
         Cipher cipher = Cipher.getInstance(ALGORITHM);
         cipher.init(Cipher.DECRYPT_MODE, key);
         byte[] decryptedValue64 = new byte[0];
@@ -40,8 +29,8 @@ public class DecryptEncrypt {
         return new String(decryptedByteValue, "UTF-8");
     }
 
-    public static String encrypt(String value) throws Exception {
-        Key key = new SecretKeySpec(KEY.getBytes("UTF-8"), ALGORITHM);
+    public static String encrypt(String value , String keyMessage) throws Exception {
+        Key key = new SecretKeySpec(keyMessage.getBytes("UTF-8"), ALGORITHM);
         Cipher cipher = Cipher.getInstance(ALGORITHM);
         cipher.init(Cipher.ENCRYPT_MODE, key);
         byte[] encryptedBytes = cipher.doFinal(value.getBytes("UTF-8"));

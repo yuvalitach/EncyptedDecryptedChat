@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputEditText;
 public class SignInActivity extends AppCompatActivity {
 
     private TextInputEditText main_EDT_name;
+    private TextInputEditText main_EDT_key;
     private MaterialButton main_BTN_sign_in;
     private Intent intent;
     private final DataManager dataManager = DataManager.getInstance();
@@ -26,28 +27,19 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = main_EDT_name.getText().toString();
-                Bundle bundle = new Bundle();
-                bundle.putString("name",name);
-                dataManager.loadMessagesFromDB();
-                intent = new Intent(SignInActivity.this, DecryptActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
-
-                //                if (exist == 0) {
-//                    if (dataManager.getCurrentUser().getRole() == 0){
-//                        intent = new Intent(SignInActivity.this, EncryptActivity.class);
-//                    } else {
-//                        dataManager.loadMessagesFromDB();
-//                        intent = new Intent(SignInActivity.this, DecryptActivity.class);
-//                    }
-//                    startActivity(intent);
-//                    finish();
-//                }
-//                if (exist == 1) {
-//                    Toast.makeText(SignInActivity.this, "The user is not registered in the system", Toast.LENGTH_SHORT).show();
-//                }
-
+                String key = main_EDT_key.getText().toString();
+                    if(key.length()<16){
+                        Toast.makeText(SignInActivity.this, "Please enter a 16 character key", Toast.LENGTH_SHORT).show();
+                        main_EDT_key.setText("");
+                    } else {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("name", name);
+                        bundle.putString("key", key);
+                        intent = new Intent(SignInActivity.this, DecryptActivity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        finish();
+                    }
             }
         });
     }
@@ -56,5 +48,6 @@ public class SignInActivity extends AppCompatActivity {
     private void findsViews(){
         main_BTN_sign_in = findViewById(R.id.main_BTN_sign_in);
         main_EDT_name = findViewById(R.id.main_EDT_name);
+        main_EDT_key = findViewById(R.id.main_EDT_key);
     }
 }

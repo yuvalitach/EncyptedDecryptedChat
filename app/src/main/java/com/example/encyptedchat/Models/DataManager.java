@@ -18,18 +18,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import java.util.ArrayList;
 
 public class DataManager {
-    private final FirebaseAuth firebaseAuth;
     private final FirebaseFirestore dbFireStore;
-    private final FirebaseStorage storage;
 
     private ArrayList<Message> messages;
-    //private ArrayList<String> encryptedValues;
     private static DataManager single_instance = null;
 
-    private DataManager(){
-        firebaseAuth = FirebaseAuth.getInstance();
+    private DataManager() {
         dbFireStore = FirebaseFirestore.getInstance();
-        storage = FirebaseStorage.getInstance();
     }
 
     public ArrayList<Message> getMessages() {
@@ -47,79 +42,13 @@ public class DataManager {
         return single_instance;
     }
 
-    public FirebaseAuth getFirebaseAuth() {
-        return firebaseAuth;
-    }
 
     public FirebaseFirestore getDbFireStore() {
         return dbFireStore;
     }
 
-    public FirebaseStorage getStorage() {
-        return storage;
-    }
 
-//    public void storeUserInDB(User userToStore) {
-//        dbFireStore.collection("Users")
-//                .document(userToStore.getName())
-//                .set(userToStore)
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void unused) {
-//                        Log.d("pttt", "DocumentSnapshot Successfully written!");
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w("pttt", "Error adding document", e);
-//                    }
-//                });
-//    }
+}
 
-//    public int findUserInDB(String name){
-//        final int[] answer = {0};
-//        CollectionReference myRef = dbFireStore.collection("Users");
-//        myRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        User loadedUser = document.toObject(User.class);
-//                        if (loadedUser.getName().equals(name)) {
-//                                DataManager.getInstance().setCurrentUser(loadedUser);
-//                                Log.d("pttt", document.getId() + " => " + document.getData());
-//                        } else{
-//                            answer[0] = 1;
-//                        }
-//                    }
-//                } else {
-//                    Log.d("pttt", "Error getting documents: ", task.getException());
-//                }
-//            }
-//        });
-//        return answer[0];
-//    }
-    public void loadMessagesFromDB() {
-        CollectionReference myRef = dbFireStore.collection("Messages");
-        myRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        messages.add(document.toObject(Message.class));
-                    }
-                } else {
-                    Log.d("pttt", "Error getting documents: ", task.getException());
-                }
-            }
-        });
-    }
 
-    public void storeMessagesInDB(String message, String name) {
-        Message temp = new Message(message, name);
-        dbFireStore.collection("Messages").document(temp.getMessageId()).set(temp);
-        messages.add(temp);
-    }
 
-    }

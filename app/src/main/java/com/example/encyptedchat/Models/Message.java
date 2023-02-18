@@ -7,11 +7,16 @@ public class Message {
     private String description;
     private String messageId;
     private String senderName;
+    private int position;
 
-    public Message(String description, String senderName) {
+    public Message(String description, String senderName , int position) {
         this.description = description;
         this.messageId = UUID.randomUUID().toString();
         this.senderName = senderName;
+        this.position = position;
+    }
+
+    public Message() {
     }
 
     public String getDescription() {
@@ -37,5 +42,13 @@ public class Message {
     public Message setSenderName(String senderName) {
         this.senderName = senderName;
         return this;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 }
